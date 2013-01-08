@@ -1,10 +1,8 @@
 <?php
-require_once(__DIR__.'/src/JsLike/Object.php');
+require_once(__DIR__ . '/vendor/autoload.php');
 
-
-
-
-///////////////////////////// DYNAMIC OBJECT
+use JsLike\Object;
+use JsLike\ObjectTrait;
 
 
 $o = new Object([
