@@ -1,0 +1,17 @@
+{
+    "name":"ptrofimov/jslikeobject",
+    "authors":[
+        {
+            "name":"Petr Trofimov",
+            "email":"petrofimov@yandex.ru"
+        }
+    ],
+    "require":{
+        "php":">=5.4"
+    },
+    "autoload":{
+        "psr-0":{
+            "JsLike":"src"
+        }
+    }
+}
