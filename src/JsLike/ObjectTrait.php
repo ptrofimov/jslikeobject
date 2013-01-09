@@ -61,7 +61,7 @@ trait ObjectTrait
     public function __get($key)
     {
         $value = null;
-        if (isset($this->object[$key])) {
+        if (array_key_exists($key, $this->object)) {
             $value = $this->object[$key];
         } elseif (is_object($this->parent)) {
             $value = $this->parent->{$key};
