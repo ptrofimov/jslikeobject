@@ -33,20 +33,13 @@ trait ObjectTrait
     public function __construct()
     {
         $args = func_get_args();
-        foreach ($args as $arg) {
-            if (is_array($arg)) {
-                $this->object = $arg;
-            } elseif (is_object($arg)) {
-                $this->parent = $arg;
-            } elseif (is_string($arg)) {
-                $reflectionClass = new \ReflectionClass($arg);
-                $instance = $reflectionClass->newInstanceWithoutConstructor();
-                $object = [];
-                foreach ($reflectionClass->getMethods() as $method) {
-                    $object[$method->getName()] = $method->getClosure($instance);
-                }
-                $this->parent = new Object($object);
-            }
+        if (count($args) == 2 && is_object($args[0]) && is_array($args[1])) {
+            $this->parent = $args[0];
+            $this->object = $args[1];
+        } elseif (count($args) == 1 && is_array($args[0])) {
+            $this->object = $args[0];
+        } else {
+            throw new \InvalidArgumentException('Invalid parameters');
         }
     }
 
