@@ -34,10 +34,9 @@ trait ObjectTrait
     {
         $args = func_get_args();
         if (count($args) == 2 && is_object($args[0]) && is_array($args[1])) {
-            $this->parent = $args[0];
-            $this->object = $args[1];
+            list($this->parent, $this->object) = $args;
         } elseif (count($args) == 1 && is_array($args[0])) {
-            $this->object = $args[0];
+            list($this->object) = $args;
         } else {
             throw new \InvalidArgumentException('Invalid parameters');
         }
@@ -61,13 +60,14 @@ trait ObjectTrait
      */
     public function __get($key)
     {
+        $value = null;
         if (isset($this->object[$key])) {
-            return $this->object[$key];
+            $value = $this->object[$key];
         } elseif (is_object($this->parent)) {
-            return $this->parent->{$key};
+            $value = $this->parent->{$key};
         }
 
-        return null;
+        return $value;
     }
 
     /**
@@ -90,10 +90,9 @@ trait ObjectTrait
      */
     public function __call($method, array $args)
     {
-        return isset($this->object[$method])
-            && is_callable($this->object[$method])
+        return is_callable($this->{$method})
             ? call_user_func_array(
-                $this->object[$method]->bindTo($this),
+                $this->{$method}->bindTo($this),
                 $args
             ) : null;
     }
