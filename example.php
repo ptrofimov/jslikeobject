@@ -1,6 +1,13 @@
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
+/**
+ * Usage example for JsLike\Object
+ *
+ * @author Petr Trofimov <petrofimov@yandex.ru>
+ * @see https://github.com/ptrofimov/jslikeobject
+ */
+
 use JsLike\Object;
 use JsLike\ObjectTrait;
 

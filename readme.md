@@ -117,4 +117,3 @@ $o = new Object(
 echo $o->getNumber(); // 6
 ```
 
-### Thank you!

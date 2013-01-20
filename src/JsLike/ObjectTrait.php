@@ -5,6 +5,7 @@ namespace JsLike;
  * Trait for creating dynamic objects
  *
  * @author Petr Trofimov <petrofimov@yandex.ru>
+ * @see https://github.com/ptrofimov/jslikeobject
  */
 trait ObjectTrait
 {
@@ -16,11 +17,11 @@ trait ObjectTrait
     private $parent;
 
     /**
-     * Array of properties and methods
+     * Array of private properties and methods
      *
      * @var array
      */
-    private $object;
+    private $object = [];
 
     /**
      * Constructor
@@ -37,8 +38,6 @@ trait ObjectTrait
             list($this->parent, $this->object) = $args;
         } elseif (count($args) == 1 && is_array($args[0])) {
             list($this->object) = $args;
-        } else {
-            throw new \InvalidArgumentException('Invalid parameters');
         }
     }
 

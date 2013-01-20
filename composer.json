@@ -1,5 +1,6 @@
 {
     "name":"ptrofimov/jslikeobject",
+    "description":"Dynamic objects a-la Javascript in PHP with inheritance",
     "authors":[
         {
             "name":"Petr Trofimov",
