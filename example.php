@@ -117,3 +117,14 @@ $o = new Object(
 
 echo $o->getNumber(); // 6
 
+/**
+ * 7. JS-like constructor
+ */
+
+$constructor = fn(function () {
+    $this->property = 7;
+});
+
+$object = $constructor(); // new instance
+
+echo $constructor()->property; // 7
