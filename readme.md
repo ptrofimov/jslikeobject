@@ -1,4 +1,4 @@
-# fn - dynamic objects a-la Javascript in PHP
+## fn - dynamic objects a-la Javascript in PHP
 
 Previous version is here https://github.com/ptrofimov/jslikeobject/tree/1.0
 

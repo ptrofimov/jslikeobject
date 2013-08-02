@@ -9,8 +9,6 @@ namespace JsLike;
  */
 class Object
 {
-    /** @var self */
-    private $prototype;
     /** @var array */
     private $properties = [];
 
@@ -19,19 +17,13 @@ class Object
         $this->properties = $properties;
     }
 
-    /** @return self|null */
-    public function prototype()
-    {
-        return $this->prototype;
-    }
-
     public function __get($key)
     {
         $value = null;
         if (array_key_exists($key, $this->properties)) {
             $value = $this->properties[$key];
-        } elseif (is_object($this->prototype)) {
-            $value = $this->prototype->{$key};
+        } elseif (isset($this->properties['prototype'])) {
+            $value = $this->properties['prototype']->{$key};
         }
 
         return $value;
@@ -53,9 +45,8 @@ class Object
 
     public function __invoke()
     {
-        $instance = new static();
+        $instance = new static($this->properties);
         if ($this->constructor) {
-            $instance->constructor = $this->constructor;
             $instance->constructor();
         }
 
