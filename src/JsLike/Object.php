@@ -9,5 +9,56 @@ namespace JsLike;
  */
 class Object
 {
-    use ObjectTrait;
+    /** @var self */
+    private $prototype;
+    /** @var array */
+    private $properties = [];
+
+    public function __construct(array $properties = [])
+    {
+        $this->properties = $properties;
+    }
+
+    /** @return self|null */
+    public function prototype()
+    {
+        return $this->prototype;
+    }
+
+    public function __get($key)
+    {
+        $value = null;
+        if (array_key_exists($key, $this->properties)) {
+            $value = $this->properties[$key];
+        } elseif (is_object($this->prototype)) {
+            $value = $this->prototype->{$key};
+        }
+
+        return $value;
+    }
+
+    public function __set($key, $value)
+    {
+        $this->properties[$key] = $value;
+    }
+
+    public function __call($method, array $args)
+    {
+        return is_callable($this->{$method})
+            ? call_user_func_array(
+                $this->{$method}->bindTo($this),
+                $args
+            ) : null;
+    }
+
+    public function __invoke()
+    {
+        $instance = new static();
+        if ($this->constructor) {
+            $instance->constructor = $this->constructor;
+            $instance->constructor();
+        }
+
+        return $instance;
+    }
 }
